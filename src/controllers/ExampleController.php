@@ -2,10 +2,12 @@
 
 namespace Lightweight\Controllers;
 
+use Lightweight\Http\Traits\Http;
+
 class ExampleController
 {
-	public function example($id)
+	public function example($slug)
 	{
-		echo $id;
+		echo $slug;
 	}
 }
