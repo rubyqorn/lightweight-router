@@ -2,4 +2,4 @@
 
 use Lightweight\Http\Route;
 
-Route::get('/', 'ExampleController@example');
+Route::get('home/{slug}', 'ExampleController@example');

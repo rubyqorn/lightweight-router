@@ -38,11 +38,10 @@ class RouteHandler
 	*
 	* @param $url string
 	* @param $controllerWithMethod $string
-	* @param $callback callback
 	*
 	* @return called controller methods
 	*/ 
-	public static function routeHandler($url, $controllerWithMethod, $callback = [])
+	public static function routeHandler($url, $controllerWithMethod)
 	{
 		self::$routeParser = new RouteParser();
 		self::$requestLineParser = new RequestLineParser();
@@ -71,12 +70,17 @@ class RouteHandler
 					self::$method = $parsedControllerWithMethod['1'];
 				}
 
-				$parseRoute = self::$routeParser->parse($url); 
+				$parseUrl = explode('/', $_GET['url']);
 
-				// Check param contains
-				if (isset($parseUrl['2'])) {
-					self::$params = $routeParser['2'];
+				// Check param contains and if exists replace into array
+				if (isset($parseUrl['1'])) {
+					self::$params = [
+						$parseUrl['1']
+					];
 				}
+
+
+				$parseRoute = self::$routeParser->parse($url); 
 
 				// Check route from route config file was like a route from request line
 				if ($parseRoute == $_GET['url']) {
@@ -86,7 +90,7 @@ class RouteHandler
 						return call_user_func([self::$controller, self::$method]);
 					}
 
-					return call_user_func_array([self::$controller, self::$method], self::$param);
+					return call_user_func_array([self::$controller, self::$method], self::$params);
 				} 
 			}
 		}	
@@ -146,5 +150,12 @@ class RouteHandler
 		}
 
 		die('Passed param is not a string');
+	}
+
+	public static function debug($str)
+	{
+		echo "<pre>";
+		print_r($str);
+		echo "</pre>";
 	}
 }

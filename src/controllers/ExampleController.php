@@ -4,8 +4,8 @@ namespace Lightweight\Controllers;
 
 class ExampleController
 {
-	public function example()
+	public function example($id)
 	{
-		echo 'Hello World';
+		echo $id;
 	}
 }
