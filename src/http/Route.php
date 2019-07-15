@@ -2,7 +2,27 @@
 
 namespace Lightweight\Http;
 
-class Route
+use Lightweight\Http\RouteHandler;
+
+class Route extends RouteHandler
 {
-	
+	public static function get()
+	{
+		//
+	}
+
+	public static function post()
+	{
+		//
+	}
+
+	public static function put()
+	{
+		//
+	}
+
+	public static function delete()
+	{
+		//
+	}
 }
