@@ -71,7 +71,6 @@ class RegularExpressionHandler
 			if (preg_match($route, $_GET['url'])) {
 				return $route;
 			} 
-			die('Passed wrong regular expression');
 		}
 		
 	}

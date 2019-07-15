@@ -40,7 +40,7 @@ class RouteParser extends Parser
 				return $_GET['url'];
 			}
 
-			return $this->url;
+			return implode('/', $this->url);
 
 		}
 

@@ -18,12 +18,133 @@ class RouteHandler
 	private static $requestLineParser;
 
 	/**
+	* @var string
+	*/ 
+	private static $controller;
+
+	/**
+	* @var string
+	*/ 
+	private static $method;
+
+	/**
+	* @var string
+	*/ 
+	private static $params;
+
+	/**
 	* Work with routes from request line 
 	* and routes from config file
+	*
+	* @param $url string
+	* @param $controllerWithMethod $string
+	* @param $callback callback
+	*
+	* @return called controller methods
 	*/ 
-	public static function routeHandler($url)
+	public static function routeHandler($url, $controllerWithMethod, $callback = [])
 	{
 		self::$routeParser = new RouteParser();
 		self::$requestLineParser = new RequestLineParser();
+
+		//If request line is empty or equal '/'
+		if (!isset($_GET['url'])) {
+			self::$controller = 'Lightweight\Controllers\ExampleController';
+			self::$controller = new self::$controller;
+			self::$method = 'example';
+			return call_user_func([self::$controller, self::$method]);
+		}
+
+		$parsedControllerWithMethod = self::parseControllerWithMethod($controllerWithMethod);
+
+		if ($parsedControllerWithMethod == TRUE) {
+
+			self::$controller = 'Lightweight\Controllers\\' . $parsedControllerWithMethod['0'];
+			self::$params = null;
+
+			// Check controller exists 
+			if (self::checkControllerExists(self::$controller)) {
+				self::$controller = new self::$controller;
+
+				// Check method exists
+				if (self::checkMethodExists(self::$controller, $parsedControllerWithMethod['1'])) {
+					self::$method = $parsedControllerWithMethod['1'];
+				}
+
+				$parseRoute = self::$routeParser->parse($url); 
+
+				// Check param contains
+				if (isset($parseUrl['2'])) {
+					self::$params = $routeParser['2'];
+				}
+
+				// Check route from route config file was like a route from request line
+				if ($parseRoute == $_GET['url']) {
+
+					// If params doesn't exists call controller method 
+					if (self::$params == null) {
+						return call_user_func([self::$controller, self::$method]);
+					}
+
+					return call_user_func_array([self::$controller, self::$method], self::$param);
+				} 
+			}
+		}	
+	}
+
+	/**
+	* Check class name was exists
+	*
+	* @param $className string
+	*
+	* @return exist class name
+	*/ 
+	private static function checkControllerExists($className)
+	{
+		if (is_string($className) && class_exists($className)) {
+			return self::$controller = $className;
+		}
+
+		die('The passed param is not a string or class name doesn\'t exists');
+	}
+
+	/**
+	* Check method exists
+	*
+	* @param $classObj object
+	* @param $methodName string
+ 	*
+ 	* @return string with method name
+	*/ 
+	private static function checkMethodExists($classObj, $methodName)
+	{
+		if (is_object($classObj) && method_exists($classObj, $methodName)) {
+			return self::$method = $methodName;
+		}
+
+		die('Passed params is not an object or method name doesn\'t exists');
+	}
+
+	private static function checkIsCallAbleFunction($callback)
+	{
+		if (is_callable($callback)) {
+			return $callback;
+		}
+	}
+
+	/**
+	* Parse string with class and method name
+	*
+	* @param $controllerWithMethod string
+	*
+	* @return parsed string
+	*/ 
+	private static function parseControllerWithMethod($controllerWithMethod)
+	{
+		if (is_string($controllerWithMethod) && isset($controllerWithMethod)) {
+			return explode('@', $controllerWithMethod);
+		}
+
+		die('Passed param is not a string');
 	}
 }
