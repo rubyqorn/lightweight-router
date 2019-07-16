@@ -129,13 +129,6 @@ class RouteHandler
 		die('Passed params is not an object or method name doesn\'t exists');
 	}
 
-	private static function checkIsCallAbleFunction($callback)
-	{
-		if (is_callable($callback)) {
-			return $callback;
-		}
-	}
-
 	/**
 	* Parse string with class and method name
 	*
@@ -152,10 +145,4 @@ class RouteHandler
 		die('Passed param is not a string');
 	}
 
-	public static function debug($str)
-	{
-		echo "<pre>";
-		print_r($str);
-		echo "</pre>";
-	}
 }
