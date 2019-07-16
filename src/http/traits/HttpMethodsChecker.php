@@ -2,6 +2,8 @@
 
 namespace Lightweight\Http\Traits;
 
+use Lightweight\Http\Traits\HttpErrors;
+
 trait HttpMethodsChecker
 {
 	/**
@@ -17,6 +19,6 @@ trait HttpMethodsChecker
 			return $_SERVER['REQUEST_METHOD'];
 		}
 
-		die('Wrong HTTP method');
+		HttpErrors::errorMessage('405');
 	}	
 }

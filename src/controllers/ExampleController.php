@@ -6,8 +6,8 @@ use Lightweight\Http\Traits\Http;
 
 class ExampleController
 {
-	public function example($slug)
+	public function example()
 	{
-		echo $slug;
+		echo 'Home';
 	}
 }

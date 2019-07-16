@@ -18,7 +18,7 @@ class Route extends RouteHandler
 	public static function get($url, $controllerWithMethod)
 	{
 		if (HttpMethodsChecker::checkHttpMethod('GET')) {
-			self::routeHandler($url, $controllerWithMethod);
+			return self::routeHandler($url, $controllerWithMethod);
 		}
 	}
 
@@ -33,7 +33,7 @@ class Route extends RouteHandler
 	public static function post($url, $controllerWithMethod)
 	{
 		if (HttpMethodsChecker::checkHttpMethod('POST')) {
-			self::routeHandler($url, $controllerWithMethod);
+			return self::routeHandler($url, $controllerWithMethod);
 		}
 	}
 
@@ -48,7 +48,7 @@ class Route extends RouteHandler
 	public static function put($url, $controllerWithMethod)
 	{
 		if (HttpMethodsChecker::checkHttpMethod('PUT')) {
-			self::routeHandler($url, $controllerWithMethod);
+			return self::routeHandler($url, $controllerWithMethod);
 		}
 	}
 
@@ -63,7 +63,7 @@ class Route extends RouteHandler
 	public static function delete($url, $controllerWithMethod)
 	{
 		if (HttpMethodsChecker::checkHttpMethod('DELETE')) {
-			self::routeHandler($url, $controllerWithMethod);
+			return self::routeHandler($url, $controllerWithMethod);
 		}
 	}
 }
