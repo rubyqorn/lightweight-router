@@ -10,16 +10,16 @@
 	can insert in require block <strong>rubyqorn/lightweight-router</strong> and in CLI use
 	<strong>composer install</strong> or just prescribe 
 </p>
-```composer require rubyqorn/lightweight-router```
+`composer require rubyqorn/lightweight-router`
 <h3>Where register and look at my routes?</h3>
 <p>
 	In the <strong>src/config/routes.php</strong> you can register your routes
 	which will be use in your web application. If you don't want to register your
 	routes in this file you can require autoload file in index.php
 </p>
-```require 'vendor/autoload.php';```
+`require 'vendor/autoload.php';`
 <p>and access route class</p>
-```use Lightweight\Http\Route;```
+`use Lightweight\Http\Route;`
 <h3>How to use?</h3>
 <p>You have four router types:</p>
 <ul>
@@ -29,7 +29,7 @@
 	<li>DELETE</li>
 </ul>
 <h4>Example:</h4>
-```Route::get('home', 'ExampleController@example');```
+`Route::get('home', 'ExampleController@example');`
 <p>If you want to use params in your routes. You can use</p>
 <ul>
 	<li>{slug}</li>
