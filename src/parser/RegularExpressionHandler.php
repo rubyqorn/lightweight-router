@@ -52,7 +52,7 @@ class RegularExpressionHandler
 	*/ 
 	private static function pushAndTransformArrayToString($url, $params)
 	{
-		array_push($url, self::$params);
+		array_push($url, $params);
 		return implode('/', $url);
 	}
 
